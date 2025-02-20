@@ -1,0 +1,26 @@
+server:
+  port: 8050
+
+spring:
+  application:
+    name: msvc-security
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://10.255.252.2:1433;encrypt=true;trustServerCertificate=true;databaseName=edemco
+    username: temptech
+    password: Edemco2024*+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: sqlserver
+    database-platform: org.hibernate.dialect.SQLServerDialect
+
+api:
+  secret: 2bdbef20d99c681c75a71d6f9101c78dc7f6ca197119127823da97486c446057
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

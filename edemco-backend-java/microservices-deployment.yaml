@@ -1,0 +1,372 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      containers:
+        - name: config-server
+          image: microservice-config:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-server
+spec:
+  selector:
+    app: config-server
+  ports:
+    - port: 8888
+      targetPort: 8888
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-server
+  template:
+    metadata:
+      labels:
+        app: eureka-server
+    spec:
+      containers:
+        - name: eureka-server
+          image: microservice-eureka:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8761
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-server
+spec:
+  selector:
+    app: eureka-server
+  ports:
+    - port: 8761
+      targetPort: 8761
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-server
+  template:
+    metadata:
+      labels:
+        app: gateway-server
+    spec:
+      containers:
+        - name: gateway-server
+          image: microservice-gateway:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-server
+spec:
+  selector:
+    app: gateway-server
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: factura-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: factura-server
+  template:
+    metadata:
+      labels:
+        app: factura-server
+    spec:
+      containers:
+        - name: factura-server
+          image: microservice-factura:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8060
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: factura-server
+spec:
+  selector:
+    app: factura-server
+  ports:
+    - port: 8060
+      targetPort: 8060
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facturacion-especial-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: facturacion-especial-server
+  template:
+    metadata:
+      labels:
+        app: facturacion-especial-server
+    spec:
+      containers:
+        - name: facturacion-especial-server
+          image: microservice-facturacion-especial:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9081
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: facturacion-especial-server
+spec:
+  selector:
+    app: facturacion-especial-server
+  ports:
+    - port: 9081
+      targetPort: 9081
+
+---
+# Microservice: generation-server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generation-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: generation-server
+  template:
+    metadata:
+      labels:
+        app: generation-server
+    spec:
+      containers:
+        - name: generation-server
+          image: microservice-generation:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9092
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: generation-server
+spec:
+  selector:
+    app: generation-server
+  ports:
+    - port: 9092
+      targetPort: 9092
+---
+# Microservice: remitentes-server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remitentes-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: remitentes-server
+  template:
+    metadata:
+      labels:
+        app: remitentes-server
+    spec:
+      containers:
+        - name: remitentes-server
+          image: microservice-remitentes:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8070
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: remitentes-server
+spec:
+  selector:
+    app: remitentes-server
+  ports:
+    - port: 8070
+      targetPort: 8070
+---
+# Microservice: security-server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: security-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: security-server
+  template:
+    metadata:
+      labels:
+        app: security-server
+    spec:
+      containers:
+        - name: security-server
+          image: microservice-security:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8050
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: security-server
+spec:
+  selector:
+    app: security-server
+  ports:
+    - port: 8050
+      targetPort: 8050
+---
+# Microservice: operadores-server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operadores-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operadores-server
+  template:
+    metadata:
+      labels:
+        app: operadores-server
+    spec:
+      containers:
+        - name: operadores-server
+          image: microservice-operadores:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9091
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: operadores-server
+spec:
+  selector:
+    app: operadores-server
+  ports:
+    - port: 9091
+      targetPort: 9091
+---
+# Microservice: integracionSiesa-server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integracionsiesa-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: integracionsiesa-server
+  template:
+    metadata:
+      labels:
+        app: integracionsiesa-server
+    spec:
+      containers:
+        - name: integracionsiesa-server
+          image: microservice-integracionsiesa:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9090
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-server:8888
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: integracionsiesa-server
+spec:
+  selector:
+    app: integracionsiesa-server
+  ports:
+    - port: 9090
+      targetPort: 9090

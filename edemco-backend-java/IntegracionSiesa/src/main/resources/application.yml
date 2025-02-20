@@ -1,0 +1,7 @@
+
+Spring:
+  application:
+    name: msvc-integracion
+  config:
+    import: optional:configserver:http://localhost:8888
+

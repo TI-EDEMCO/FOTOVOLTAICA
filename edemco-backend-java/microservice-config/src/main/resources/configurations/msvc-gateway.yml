@@ -1,0 +1,102 @@
+eureka:
+  client:
+    register-with-eureka: false
+
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "PATCH"
+              - "DELETE"
+              - "OPTIONS"
+            allowed-headers: "*"
+            allow-credentials: false
+            max-age: 3600
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: integracion-siesa
+          uri: 'http://localhost:9090'
+          predicates:
+            - Path=/api/integracion_siesa/**
+          filters:
+            - AuthenticationFilter
+
+        - id: remitentes
+          uri: 'http://localhost:8070'
+          predicates:
+            - Path=/api/email/**
+          filters:
+            - AuthenticationFilter
+
+        - id: integracion-cliente
+          uri: 'http://localhost:9090'
+          predicates:
+            - Path=/api/cliente/**
+          filters:
+            - AuthenticationFilter
+
+        - id: integracion-planta
+          uri: 'http://localhost:9090'
+          predicates:
+            - Path=/api/planta/**
+          filters:
+            - AuthenticationFilter
+
+        - id: factura
+          uri: 'http://localhost:8060'
+          predicates:
+            - Path=/api/historico_facturas/**
+          filters:
+            - AuthenticationFilter
+
+        - id: operador
+          uri: 'http://localhost:9091'
+          predicates:
+            - Path=/api/operador/**
+          filters:
+            - AuthenticationFilter
+
+        - id: tarifaoperador
+          uri: 'http://localhost:9091'
+          predicates:
+            - Path=/api/tarifaoperador/**
+          filters:
+            - AuthenticationFilter
+
+        - id: facturacion-especial
+          uri: 'http://localhost:9081'
+          predicates:
+            - Path=/api/facturacion_especial/**
+          filters:
+            - AuthenticationFilter
+
+        - id: generation
+          uri: 'http://localhost:9092'
+          predicates:
+            - Path=/api/generacion/**
+          filters:
+            - AuthenticationFilter
+
+        - id: security
+          uri: 'http://localhost:8050'
+          predicates:
+            - Path=/api/**
+
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Methods Access-Control-Allow-Headers RETAIN_FIRST

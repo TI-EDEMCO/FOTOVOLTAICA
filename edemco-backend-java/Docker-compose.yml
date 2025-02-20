@@ -1,0 +1,201 @@
+services:
+  config-server:
+    image: microservice-config
+    container_name: microservice-config
+    build:
+      context: ./microservice-config
+    ports:
+      - "8889:8889"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://config-server:8888/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - microservice-network
+
+  eureka-server:
+    image: microservice-eureka
+    container_name: microservice-eureka
+    build:
+      context: ./microservice-eureka
+    ports:
+      - "8761:8761"
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://eureka-server:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - microservice-network
+
+  gateway-server:
+    image: microservice-gateway
+    container_name: microservice-gateway
+    build:
+      context: ./microservice-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://gateway-server:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - microservice-network
+
+  factura-server:
+     image: microservice-factura
+     container_name: microservice-factura
+     build:
+       context: ./microservice-factura
+     ports:
+       - "8060:8060"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://factura-server:8060/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+  facturacion-especial-server:
+     image: microservice-facturacion-especial
+     container_name: microservice-facturacion-especial
+     build:
+       context: ./microservice-facturacion-especial
+     ports:
+       - "9081:9081"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://facturacion-especial-server:9081/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+  generation-server:
+     image: microservice-generation
+     container_name: microservice-generation
+     build:
+       context: ./microservice-generation
+     ports:
+       - "9092:9092"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://generation-server:9092/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+  remitentes-server:
+     image: microservice-remitentes
+     container_name: microservice-remitentes
+     build:
+       context: ./microservice-remitentes
+     ports:
+       - "8070:8070"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://remitentes-server:8070/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+  security-server:
+     image: microservice-security
+     container_name: microservice-security
+     build:
+       context: ./microservice-security
+     ports:
+       - "8050:8050"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://security-server:8050/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+  Operadores-server:
+     image: microservice-operadores
+     container_name: microservice-operadores
+     build:
+       context: ./Operadores
+     ports:
+       - "9091:9091"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://operadores-server:9091/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+  integracionSiesa-server:
+     image: microservice-integracionsiesa
+     container_name: microservice-integracionSiesa
+     build:
+       context: ./IntegracionSiesa
+     ports:
+       - "9090:9090"
+     depends_on:
+       config-server:
+         condition: service_healthy
+     environment:
+       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://integracionSiesa:9090/actuator/health"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     networks:
+       - microservice-network
+
+networks:
+  microservice-network:
+    driver: bridge
+
+

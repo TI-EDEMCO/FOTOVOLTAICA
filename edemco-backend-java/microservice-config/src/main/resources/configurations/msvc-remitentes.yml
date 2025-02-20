@@ -1,0 +1,23 @@
+server:
+  port: 8070
+
+spring:
+  application:
+    name: msvc-remitentes
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://10.255.252.2:1433;encrypt=true;trustServerCertificate=true;databaseName=edemco
+    username: temptech
+    password: Edemco2024*+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: sqlserver
+    database-platform: org.hibernate.dialect.SQLServerDialect
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

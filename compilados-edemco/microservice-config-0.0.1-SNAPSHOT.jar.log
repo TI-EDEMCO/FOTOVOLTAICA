@@ -1,0 +1,40 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-12-05T16:57:15.876-05:00  INFO 25204 --- [config-server] [           main] c.m.c.MicroserviceConfigApplication      : Starting MicroserviceConfigApplication v0.0.1-SNAPSHOT using Java 17.0.11 with PID 25204 (C:\edemco\compilados-edemco\microservice-config-0.0.1-SNAPSHOT.jar started by usuario in C:\edemco\compilados-edemco)
+2024-12-05T16:57:15.882-05:00  INFO 25204 --- [config-server] [           main] c.m.c.MicroserviceConfigApplication      : The following 1 profile is active: "native"
+2024-12-05T16:57:17.677-05:00  INFO 25204 --- [config-server] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=d3c4a260-aae6-3915-8cf5-147ab2f59cb7
+2024-12-05T16:57:18.212-05:00  INFO 25204 --- [config-server] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-12-05T16:57:18.227-05:00  INFO 25204 --- [config-server] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-05T16:57:18.227-05:00  INFO 25204 --- [config-server] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-12-05T16:57:18.287-05:00  INFO 25204 --- [config-server] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-05T16:57:18.288-05:00  INFO 25204 --- [config-server] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2255 ms
+2024-12-05T16:57:19.415-05:00  INFO 25204 --- [config-server] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2024-12-05T16:57:19.532-05:00  INFO 25204 --- [config-server] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8888 (http) with context path ''
+2024-12-05T16:57:19.613-05:00  INFO 25204 --- [config-server] [           main] c.m.c.MicroserviceConfigApplication      : Started MicroserviceConfigApplication in 4.619 seconds (process running for 5.389)
+2024-12-05T16:57:21.920-05:00  INFO 25204 --- [config-server] [nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-05T16:57:21.921-05:00  INFO 25204 --- [config-server] [nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-05T16:57:21.922-05:00  INFO 25204 --- [config-server] [nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-12-05T16:57:30.679-05:00  INFO 25204 --- [config-server] [nio-8888-exec-3] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-eureka.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:57:45.207-05:00  INFO 25204 --- [config-server] [nio-8888-exec-5] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-gateway.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:57:59.835-05:00  INFO 25204 --- [config-server] [nio-8888-exec-6] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-factura.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:58:22.017-05:00  INFO 25204 --- [config-server] [nio-8888-exec-7] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-facturacion-especial.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:58:38.218-05:00  INFO 25204 --- [config-server] [nio-8888-exec-9] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-remitentes.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:58:59.984-05:00  INFO 25204 --- [config-server] [nio-8888-exec-1] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-security.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:59:15.641-05:00  INFO 25204 --- [config-server] [nio-8888-exec-3] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-generation.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:59:37.872-05:00  INFO 25204 --- [config-server] [nio-8888-exec-5] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-operadores.yml]' via location 'classpath:/configurations/'
+2024-12-05T16:59:59.952-05:00  INFO 25204 --- [config-server] [nio-8888-exec-7] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-integracion.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:07:12.481-05:00  INFO 25204 --- [config-server] [nio-8888-exec-1] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-gateway.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:07:29.560-05:00  INFO 25204 --- [config-server] [nio-8888-exec-4] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-eureka.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:07:55.590-05:00  INFO 25204 --- [config-server] [nio-8888-exec-7] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-operadores.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:08:24.537-05:00  INFO 25204 --- [config-server] [nio-8888-exec-9] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-factura.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:08:47.548-05:00  INFO 25204 --- [config-server] [nio-8888-exec-2] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-facturacion-especial.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:09:05.888-05:00  INFO 25204 --- [config-server] [nio-8888-exec-3] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-security.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:09:22.333-05:00  INFO 25204 --- [config-server] [nio-8888-exec-5] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-remitentes.yml]' via location 'classpath:/configurations/'
+2024-12-05T17:09:45.303-05:00  INFO 25204 --- [config-server] [nio-8888-exec-7] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'class path resource [configurations/msvc-generation.yml]' via location 'classpath:/configurations/'
